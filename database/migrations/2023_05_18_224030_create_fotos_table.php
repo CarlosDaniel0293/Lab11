@@ -8,23 +8,28 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('mascotas', function (Blueprint $table) {
+        Schema::create('fotos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('nombre_cliente');
+            $table->string('ruta');
             $table->integer('estado');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     * 
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('mascotas');
+        Schema::dropIfExists('fotos');
     }
 };
